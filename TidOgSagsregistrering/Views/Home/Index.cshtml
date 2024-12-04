@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Afdelinger";
+    var afdelinger = ViewBag.Afdelinger as List<DTO.Models.AfdelingDTO>;
+    var medarbejdere = ViewBag.Medarbejdere as List<DTO.Models.MedarbejderDTO>;
+    int? selectedAfdelingId = ViewBag.SelectedAfdelingId as int?;
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4>Vælg en afdeling</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="form-group">
+                            <label for="afdelingDropdown">Afdeling:</label>
+                            @Html.DropDownList("afdelingDropdown", new SelectList(afdelinger.Prepend(new DTO.Models.AfdelingDTO { Id = 0, Navn = "Alle afdelinger" }), "Id", "Navn", selectedAfdelingId), "-- Vælg en afdeling --", new { @class = "form-control", onchange = "this.form.submit();" })
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (medarbejdere != null && medarbejdere.Count > 0)
+            {
+                <div class="card shadow mt-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h4>Medarbejdere</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            @foreach (var medarbejder in medarbejdere)
+                            {
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <strong>Navn:</strong> @medarbejder.Navn
+                                        </div>
+                                        <div class="col-md-2">
+                                            <strong>Initialer:</strong> @medarbejder.Initial
+                                        </div>
+                                        <div class="col-md-3">
+                                            <strong>Afdeling:</strong> @medarbejder.Afdeling.Navn
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <a href="@Url.Action("ShowTimeRegistrations", "Time", new { medarbejderId = medarbejder.Id })" class="btn btn-outline-secondary btn-sm mr-2">
+                                                Vis tidsregistreringer
+                                            </a>
+                                            <a href="@Url.Action("AddTimeRegistration", "Time", new { medarbejderId = medarbejder.Id })" class="btn btn-outline-primary btn-sm">
+                                                Tilføj tidsregistreringer
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+            else if (selectedAfdelingId.HasValue)
+            {
+                <p class="text-muted mt-4">Ingen medarbejdere fundet for denne afdeling.</p>
+            }
+        </div>
+    </div>
+</div>

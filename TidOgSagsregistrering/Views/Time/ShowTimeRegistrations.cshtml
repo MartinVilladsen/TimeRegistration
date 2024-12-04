@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Tidsregistreringer for " + ViewBag.Medarbejder.Navn;
+    var medarbejder = ViewBag.Medarbejder as DTO.Models.MedarbejderDTO;
+    var tidsregistreringer = ViewBag.Tidsregistreringer as List<DTO.Models.TidsregistreringDTO>;
+
+    // Set the target weekly registration hours to 37
+    var weeklyTargetHours = 37.0;
+
+    // Calculate total registered hours this week
+    var totalRegisteredHours = tidsregistreringer.Sum(tr => (tr.SlutTid - tr.StartTid).TotalHours);
+
+    // Calculate hours left to register
+    var timerTilbage = Math.Max(weeklyTargetHours - totalRegisteredHours, 0);
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4>Tidsregistreringer for @medarbejder.Navn</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Afdeling:</strong> @medarbejder.Afdeling.Navn</p>
+            <p><strong>Periode:</strong> @(DateTime.Now.AddDays(-7).ToString("dd/MM/yyyy")) - @(DateTime.Now.ToString("dd/MM/yyyy"))</p>
+
+            <h5 class="mt-4">Ugentlig Oversigt</h5>
+            <p>Registrerede timer denne uge: <strong>@totalRegisteredHours</strong> timer</p>
+            <p>Timer tilbage at registrere: <strong>@timerTilbage</strong> timer</p>
+
+            <h5 class="mt-4">Detaljerede Tidsregistreringer</h5>
+            <table class="table table-bordered mt-3">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Starttid</th>
+                        <th>Sluttid</th>
+                        <th>Varighed</th>
+                        <th>Opgave</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tidsregistrering in tidsregistreringer)
+                    {
+                        var duration = tidsregistrering.SlutTid - tidsregistrering.StartTid;
+                        <tr>
+                            <td>@tidsregistrering.StartTid.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@tidsregistrering.SlutTid.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@string.Format("{0:D2}:{1:D2}:{2:D2}", (int)duration.TotalHours, duration.Minutes, duration.Seconds)</td>
+                            <td>
+                                @if (tidsregistrering.Sag != null)
+                                {
+                                    <div>
+                                        <strong>Overskrift:</strong> @tidsregistrering.Sag.Overskrift <br />
+                                        <strong>Beskrivelse:</strong> @tidsregistrering.Sag.Beskrivelse <br />
+                                        <strong>Sagsnr:</strong> @tidsregistrering.Sag.Sagsnr
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span>Ingen opgave</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

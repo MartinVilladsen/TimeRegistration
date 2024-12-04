@@ -1,0 +1,25 @@
+﻿<Window x:Class="WPF.EditSagWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF"
+        mc:Ignorable="d"
+        Title="EditSagWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Vælg en Sag til Redigering" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Sag:" FontWeight="Bold" />
+            <ComboBox x:Name="cmbSelectSag" Width="300" Margin="0,5" SelectionChanged="cmbSelectSag_SelectionChanged"/>
+
+            <TextBlock Text="Overskrift:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox x:Name="txtEditOverskrift" Width="300" Margin="0,5" />
+
+            <TextBlock Text="Beskrivelse:" FontWeight="Bold" />
+            <TextBox x:Name="txtEditBeskrivelse" Width="300" Margin="0,5" />
+
+            <Button Content="Opdater Sag" Width="150" Margin="0,10" Click="UpdateSag_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
