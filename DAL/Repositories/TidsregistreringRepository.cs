@@ -1,10 +1,7 @@
 ﻿using DAL.Mappers;
 using DTO.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
 
 
@@ -18,14 +15,6 @@ namespace DAL.Repositories
             {
 
                 return TidsregistreringMapper.Map(context.Tidsregistreringer.Find(id));
-            }
-        }
-
-        public static List<TidsregistreringDTO> GetTidsregistreringer()
-        {
-            using (Context context = new Context())
-            {
-                return context.Tidsregistreringer.ToList().Select(t => TidsregistreringMapper.Map(t)).ToList();
             }
         }
 
@@ -51,9 +40,6 @@ namespace DAL.Repositories
                 return dto;
             }
         }
-
-
-
 
         public static List<TidsregistreringDTO> GetTidsregistreringerForMedarbejder(int medarbejderId)
         {

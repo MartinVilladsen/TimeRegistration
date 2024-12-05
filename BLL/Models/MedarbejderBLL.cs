@@ -20,8 +20,6 @@ namespace BLL
         {
             MedarbejderRepository.DeleteMedarbejder(id);
         }
-     
-
         public static List<MedarbejderDTO> GetAllMedarbejder()
         {
             return MedarbejderRepository.GetMedarbejdere();

@@ -1,10 +1,7 @@
 ﻿using DAL.Mappers;
 using DTO.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
 
 
@@ -12,15 +9,6 @@ namespace DAL.Repositories
 {
     public class SagRepository
     {
-        public static SagDTO GetSagBySagNr(int sagNr)
-        {
-            using (Context context = new Context())
-            {
-
-                return SagMapper.Map(context.Sager.Where(s => s.Sagsnr == sagNr).FirstOrDefault()) ?? null;
-            }
-        }
-
         public static SagDTO GetSag(int id)
         {
             using (Context context = new Context())

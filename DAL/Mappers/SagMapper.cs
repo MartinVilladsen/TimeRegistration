@@ -1,9 +1,4 @@
 ﻿using DTO.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Mappers
 {
@@ -45,25 +40,6 @@ namespace DAL.Mappers
                     Afdeling = AfdelingMapper.Map(sagDTO.Afdeling),
                 };
             }
-        }
-
-        public static List<SagDAL> MapSagerListe(List<SagDTO> list)
-        {
-            List<SagDAL> result = new List<SagDAL>();
-            foreach (SagDTO sager in list)
-            {
-                result.Add(Map(sager));
-            }
-            return result;
-        }
-
-        internal static void Update(SagDTO sagDTO, SagDAL sagDAL)
-        {
-            if (sagDTO == null || sagDAL == null) return;
-            sagDAL.Sagsnr = sagDTO.Sagsnr;
-            sagDAL.Overskrift = sagDTO.Overskrift;
-            sagDAL.Beskrivelse = sagDTO.Beskrivelse;
-            sagDAL.Afdeling = AfdelingMapper.Map(sagDTO.Afdeling);
         }
     }
 }

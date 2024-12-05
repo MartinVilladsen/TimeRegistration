@@ -1,9 +1,5 @@
 ﻿using DTO.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Mappers
 {
@@ -65,19 +61,5 @@ namespace DAL.Mappers
             }
             return result;
         }
-
-
-
-
-        public static void Update(TidsregistreringDTO tidsregistreringDTO, TidsregistreringDAL tidsregistreringDAL)
-        {
-            if (tidsregistreringDTO == null || tidsregistreringDAL == null) return;
-            tidsregistreringDAL.StartTid = tidsregistreringDTO.StartTid;
-            tidsregistreringDAL.SlutTid = tidsregistreringDTO.SlutTid;
-            tidsregistreringDAL.Medarbejder = MedarbejderMapper.Map(tidsregistreringDTO.Medarbejder);
-            tidsregistreringDAL.Sag = SagMapper.Map(tidsregistreringDTO.Sag);
-        }
-
-        
     }
 }

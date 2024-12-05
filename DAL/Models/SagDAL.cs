@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DAL
 {
@@ -16,7 +13,6 @@ namespace DAL
         public string Beskrivelse { get; set; }
         public AfdelingDAL Afdeling { get; set; }
         public List<TidsregistreringDAL> Tidsregistrering { get; set; }
-
 
         public SagDAL(int sagsnr, string overskrift, string beskrivelse, AfdelingDAL afdeling)
         {

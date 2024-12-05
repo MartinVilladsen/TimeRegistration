@@ -68,8 +68,8 @@
     <Compile Include="EditSagWindow.xaml.cs">
       <DependentUpon>EditSagWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TimeRegistrationWindow.xaml.cs">
-      <DependentUpon>TimeRegistrationWindow.xaml</DependentUpon>
+    <Compile Include="TidsregistreringsWindow.xaml.cs">
+      <DependentUpon>TidsregistreringsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="EditSagWindow.xaml">
       <SubType>Designer</SubType>
@@ -87,7 +87,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TimeRegistrationWindow.xaml">
+    <Page Include="TidsregistreringsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

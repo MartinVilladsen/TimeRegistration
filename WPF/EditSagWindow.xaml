@@ -8,7 +8,7 @@
         Title="EditSagWindow" Height="450" Width="800">
     <Grid>
         <StackPanel Margin="10">
-            <TextBlock Text="Vælg en Sag til Redigering" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="Vælg en Sag at redigere" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
             <TextBlock Text="Sag:" FontWeight="Bold" />
             <ComboBox x:Name="cmbSelectSag" Width="300" Margin="0,5" SelectionChanged="cmbSelectSag_SelectionChanged"/>

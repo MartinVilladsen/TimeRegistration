@@ -2,9 +2,7 @@
 using DTO.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BLL.Models
 {
@@ -13,11 +11,6 @@ namespace BLL.Models
         public static TidsregistreringDTO GetTidsregistreringById(int id)
         {
             return TidsregistreringRepository.GetTidsregistreringById(id);
-        }
-
-        public static List<TidsregistreringDTO> GetAllTidsregistreringer()
-        {
-            return TidsregistreringRepository.GetTidsregistreringer();
         }
 
         public static TidsregistreringDTO CreateTidsregistrering(DateTime starttid, DateTime sluttid, MedarbejderDTO medarbejder, SagDTO sag = null)

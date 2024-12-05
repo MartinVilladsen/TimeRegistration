@@ -7,25 +7,21 @@ namespace TidOgSagsregistrering.Controllers
     {
         public ActionResult Index(int? afdelingId)
         {
-            ViewBag.Afdelinger = AfdelingBLL.GetAllAfdelinger();
+            var afdelinger = AfdelingBLL.GetAllAfdelinger();
+            ViewBag.Afdelinger = afdelinger;
 
-            if (!afdelingId.HasValue)
-            {
-                ViewBag.Medarbejdere = MedarbejderBLL.GetAllMedarbejder();
-                ViewBag.SelectedAfdelingId = null;
-            }
-            else if (afdelingId == 0)
-            {
-                ViewBag.Medarbejdere = MedarbejderBLL.GetAllMedarbejder();
-                ViewBag.SelectedAfdelingId = 0;
-            }
-            else
-            {
-                ViewBag.Medarbejdere = MedarbejderBLL.GetMedarbejdereForAfdeling(afdelingId.Value);
-                ViewBag.SelectedAfdelingId = afdelingId.Value;
-            }
+            ViewBag.SelectedAfdelingId = afdelingId ?? 0;
 
-            return View();
+            ViewBag.SelectedAfdeling = afdelingId.HasValue && afdelingId > 0
+                ? AfdelingBLL.GetAfdelingById(afdelingId.Value)
+                : null;
+
+
+            var medarbejdere = afdelingId.HasValue && afdelingId > 0
+                ? MedarbejderBLL.GetMedarbejdereForAfdeling(afdelingId.Value)
+                : MedarbejderBLL.GetAllMedarbejder();
+
+            return View(medarbejdere);
         }
 
         [HttpPost]

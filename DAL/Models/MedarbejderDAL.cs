@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -15,7 +11,6 @@ namespace DAL
         public string CprNummer { get; set; }
         public string Navn { get; set; }
         public virtual AfdelingDAL Afdeling { get; set; } 
-
         public List<TidsregistreringDAL> Tidsregistrering { get; set; }
 
         public MedarbejderDAL(string initial, string cprnummer, string navn, AfdelingDAL afdeling)

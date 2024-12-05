@@ -1,5 +1,4 @@
 ﻿using DTO.Models;
-using System.Collections.Generic;
 
 namespace DAL.Mappers
 {

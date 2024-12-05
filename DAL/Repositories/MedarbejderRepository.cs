@@ -3,22 +3,12 @@ using DTO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
 
 namespace DAL.Repositories
 {
     public class MedarbejderRepository
     {
-        public static MedarbejderDTO GetMedarbejderByInitial(string initial)
-        {
-            using (Context context = new Context())
-            {
-                return MedarbejderMapper.Map(context.Medarbejdere.Where(m => m.Initial == initial).FirstOrDefault()) ?? null;
-            }
-        }
-
         public static void DeleteMedarbejder(int id)
         {
             using (var context = new Context())
@@ -27,7 +17,7 @@ namespace DAL.Repositories
 
                 if (medarbejder == null)
                 {
-                    throw new Exception("Employee not found.");
+                    throw new Exception("Medarbejder ikke fundet.");
                 }
 
                 context.Medarbejdere.Remove(medarbejder);

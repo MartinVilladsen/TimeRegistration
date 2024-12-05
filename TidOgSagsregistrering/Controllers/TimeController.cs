@@ -9,7 +9,9 @@ namespace TidOgSagsregistrering.Controllers
 {
     public class TimeController : Controller
     {
-        public ActionResult ShowTimeRegistrations(int medarbejderId)
+
+
+        public ActionResult ShowTidsregistrering(int medarbejderId)
         {
             var medarbejder = MedarbejderBLL.GetMedarbejderById(medarbejderId);
             var tidsregistreringer = TidsregistreringBLL.GetTidsregistreringerForMedarbejder(medarbejderId);
@@ -20,7 +22,7 @@ namespace TidOgSagsregistrering.Controllers
             return View();
         }
 
-        public ActionResult AddTimeRegistration(int medarbejderId)
+        public ActionResult AddTidsregistrering(int medarbejderId)
         {
             var medarbejder = MedarbejderBLL.GetMedarbejderById(medarbejderId);
 
@@ -34,9 +36,8 @@ namespace TidOgSagsregistrering.Controllers
 
 
         [HttpPost]
-        public ActionResult AddTimeRegistration(int medarbejderId, DateTime startTid, DateTime slutTid, int? sagId)
+        public ActionResult AddTidsregistrering(int medarbejderId, DateTime startTid, DateTime slutTid, int? sagId)
         {
-            // Retrieve the employee
             var medarbejder = MedarbejderBLL.GetMedarbejderById(medarbejderId);
 
             SagDTO sag = null;
@@ -45,33 +46,30 @@ namespace TidOgSagsregistrering.Controllers
                 sag = SagBLL.GetSagById(sagId.Value);
                 if (sag == null)
                 {
-                    ModelState.AddModelError("sagId", "Invalid Sag Id");
+                    ModelState.AddModelError("sagId", "Ugyldig Sag");
                 }
             }
 
             if (medarbejder == null)
             {
-                ModelState.AddModelError("medarbejderId", "Invalid Medarbejder Id");
+                ModelState.AddModelError("medarbejderId", "Ugyldig Medarbejder");
             }
 
             if (startTid >= slutTid)
             {
-                ModelState.AddModelError("slutTid", "Sluttid must be greater than Starttid");
+                ModelState.AddModelError("slutTid", "Sluttidspunkt skal være efter startstidspunkt :) ");
             }
 
             if (!ModelState.IsValid)
             {
-                // Repopulate dropdown data if validation fails
                 ViewBag.Medarbejder = medarbejder;
                 ViewBag.Sager = medarbejder?.Afdeling != null ? SagBLL.GetSagerForAfdeling(medarbejder.Afdeling.Nummer) : new List<SagDTO>();
                 return View();
             }
 
-            // Create the new TidsregistreringDTO without requiring a case
             TidsregistreringBLL.CreateTidsregistrering(startTid, slutTid, medarbejder, sag);
 
-            // Redirect to ShowTimeRegistrations
-            return RedirectToAction("ShowTimeRegistrations", new { medarbejderId = medarbejderId });
+            return RedirectToAction("ShowTidsregistrering", new { medarbejderId = medarbejderId });
         }
 
 

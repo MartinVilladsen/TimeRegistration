@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Tidsregistrering for " + ViewBag.Medarbejder.Navn;
+    var medarbejder = ViewBag.Medarbejder as DTO.Models.MedarbejderDTO;
+    var sager = ViewBag.Sager as List<DTO.Models.SagDTO>;
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <h4 class="text-primary">Tidsregistrering for @medarbejder.Navn</h4>
+    <p><strong>CPR:</strong> @medarbejder.CprNummer</p>
+    <p><strong>Afdeling:</strong> @medarbejder.Afdeling.Navn</p>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary mb-3">Tilbage til oversigten</a>
+
+    @using (Html.BeginForm("AddTidsregistrering", "Time", FormMethod.Post))
+    {
+        @Html.Hidden("medarbejderId", medarbejder.Id)
+
+        <label for="startTid">Starttidspunkt:</label>
+        @Html.TextBox("startTid", "", new { @class = "form-control mb-2", type = "datetime-local", required = "required" })
+        @Html.ValidationMessage("startTid", "", new { @class = "text-danger" })
+
+        <label for="slutTid">Sluttidspunkt:</label>
+        @Html.TextBox("slutTid", "", new { @class = "form-control mb-2", type = "datetime-local", required = "required" })
+        @Html.ValidationMessage("slutTid", "", new { @class = "text-danger" })
+
+        <label for="sagId">Vælg en sag:</label>
+        @Html.DropDownList("sagId", new SelectList(sager, "Id", "Overskrift"), "-- Ingen Sag --", new { @class = "form-control mb-3" })
+        @Html.ValidationMessage("sagId", "", new { @class = "text-danger" })
+
+        <button type="submit" class="btn btn-primary">Gem Tidsregistrering</button>
+    }
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger mt-3">
+            <strong>Validering fejlede:</strong>
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+</div>

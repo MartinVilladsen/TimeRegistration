@@ -1,20 +1,14 @@
 ﻿
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
 using DTO.Models;
 using DAL.Repositories;
-using DAL.Mappers;
 
 namespace BLL
 {
     public class AfdelingBLL
     {
 
-        public static AfdelingDTO GetAfdeling(int id)
+        public static AfdelingDTO GetAfdelingById(int id)
         {
             return AfdelingRepository.GetAfdelingById(id);
         }
@@ -28,7 +22,5 @@ namespace BLL
         {
             return AfdelingRepository.AddAfdeling(new AfdelingDTO(name, number));
         }
-
-        
     }
 }
