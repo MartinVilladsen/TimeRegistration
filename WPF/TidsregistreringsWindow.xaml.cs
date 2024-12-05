@@ -45,7 +45,7 @@ namespace WPF
         {
             var tidsregistreringer = TidsregistreringBLL.GetTidsregistreringerForMedarbejder(Medarbejder.Id);
 
-            var måned = tidsregistreringer
+            var måneder = tidsregistreringer
                 .Select(tr => new DateTime(tr.StartTid.Year, tr.StartTid.Month, 1))
                 .Distinct()
                 .OrderBy(d => d)
@@ -53,9 +53,9 @@ namespace WPF
 
             cmbPeriode.Items.Clear();
             cmbPeriode.Items.Add("Vælg et måned"); 
-            foreach (var month in måned)
+            foreach (var måned in måneder)
             {
-                cmbPeriode.Items.Add(month.ToString("MMMM yyyy")); 
+                cmbPeriode.Items.Add(måned.ToString("MMMM yyyy")); 
             }
             cmbPeriode.SelectedIndex = 0; 
         }
