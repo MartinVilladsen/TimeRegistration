@@ -54,6 +54,12 @@ namespace WPF
             string navn = txtNavn.Text;
             AfdelingDTO selectedAfdeling = cmbAfdeling.SelectedItem as AfdelingDTO;
 
+            if (MedarbejderBLL.GetAllMedarbejder().Any(m => m.Initial == initial))
+            {
+                MessageBox.Show("Medarbejder med initial findes allerede");
+                return;
+            }
+
             if (selectedAfdeling == null || string.IsNullOrEmpty(initial) || string.IsNullOrEmpty(cprNummer) || string.IsNullOrEmpty(navn))
             {
                 MessageBox.Show("Udfyld alle felter og vælg en afdeing.");

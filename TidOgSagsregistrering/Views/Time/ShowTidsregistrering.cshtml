@@ -11,7 +11,6 @@
 <div class="container mt-5">
     <h4 class="text-primary">Tidsregistreringer for @medarbejder.Navn</h4>
     <p><strong>Afdeling:</strong> @medarbejder.Afdeling.Navn</p>
-    <p><strong>Periode:</strong> @(DateTime.Now.AddDays(-7).ToString("dd/MM/yyyy")) - @(DateTime.Now.ToString("dd/MM/yyyy"))</p>
     <a href="@Url.Action("Index", "Home")" class="btn btn-secondary mb-3">Tilbage til oversigten</a>
 
     <h5 class="text-secondary">Oversigt</h5>

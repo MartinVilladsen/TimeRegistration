@@ -25,8 +25,5 @@ namespace BLL.Models
         {
             return TidsregistreringRepository.GetTidsregistreringerForMedarbejder(medarbejderId);
         }
-
-
-
     }
 }

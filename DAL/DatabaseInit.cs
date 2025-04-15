@@ -30,11 +30,11 @@ namespace DAL
             context.Medarbejdere.Add(jd);
 
 
-            var sag1 = new SagDAL(12345, "Marketing Kampagne", "Beskrivelse af Marketing kampagne", marketing);
-            var sag2 = new SagDAL(67890, "IT System Opgradering", "Beskrivelse af IT system opgradering", it);
-            var sag3 = new SagDAL(11223, "Økonomi Rapport", "Beskrivelse af økonomirapport", øko);
-            var sag4 = new SagDAL(44567, "Social Media Strategi", "Udvikling af strategi for sociale medier", marketing);
-            var sag5 = new SagDAL(99876, "Ny Hardware Implementering", "Implementering af nye hardware systemer", it);
+            var sag1 = new SagDAL(12345, "Marketing Kampagne", "Firma Marketing kampagne", marketing);
+            var sag2 = new SagDAL(67890, "IT System Optimering", "Optimering af nuværende IT system", it);
+            var sag3 = new SagDAL(11223, "Økonomi Rapport", "Skal laves økonomirapport", øko);
+            var sag4 = new SagDAL(44567, "Social Media", "Strategi for Social Media", marketing);
+            var sag5 = new SagDAL(99876, "Ny Implementering af system", "Implementering af nye systemer", it);
             var sag6 = new SagDAL(55432, "Budgetanalyse", "Analyse af kommende budget", øko);
 
             context.Sager.Add(sag1);
@@ -46,11 +46,11 @@ namespace DAL
 
 
             var tidsregistrering1 = new TidsregistreringDAL(
-    DateTime.Now.AddDays(-10).AddHours(-5),
-    DateTime.Now.AddDays(-10).AddHours(-3),
-    ob,
-    sag2
-);
+                DateTime.Now.AddDays(-10).AddHours(-5),
+                DateTime.Now.AddDays(-10).AddHours(-3),
+                ob,
+                sag2
+            );
 
             var tidsregistrering2 = new TidsregistreringDAL(
                 DateTime.Now.AddDays(-8).AddHours(-6),
